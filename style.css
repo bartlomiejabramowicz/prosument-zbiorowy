@@ -1,0 +1,548 @@
+/* 
+   Modern Design System for Prosument Zbiorowy 
+   Theme: Technical, Modern, Friendly
+*/
+
+:root {
+    /* Colors */
+    --primary-color: #0f172a;
+    /* Deep Technical Blue */
+    --primary-light: #1e293b;
+    /* Lighter Navy */
+    --secondary-color: #10b981;
+    /* Modern Energetic Green */
+    --secondary-dark: #059669;
+    /* Darker Green for interactions */
+    --accent-color: #f59e0b;
+    /* Warm Sun Yellow */
+
+    --bg-body: #f8fafc;
+    /* Very light cool gray */
+    --bg-card: #ffffff;
+    /* Pure white */
+    --bg-gradient-start: #f1f5f9;
+    --bg-gradient-end: #e2e8f0;
+
+    --text-main: #1f2933;
+    /* Dark Graphite */
+    --text-muted: #4b5563;
+    /* Muted Gray */
+    --text-light: #f8fafc;
+    /* White text on dark bg */
+
+    /* Typography */
+    --font-main: "Montserrat", sans-serif;
+    --font-size-base: 16px;
+    --line-height-base: 1.6;
+
+    /* Spacing */
+    --container-width: 1200px;
+    --spacing-section: 100px;
+    --spacing-md: 2rem;
+    --spacing-sm: 1rem;
+
+    /* UI Elements */
+    --radius-lg: 16px;
+    --radius-md: 8px;
+    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --glass-bg: rgba(255, 255, 255, 0.9);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Reset & Scaffolding */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    line-height: var(--line-height-base);
+    font-weight: 400;
+}
+
+img,
+video {
+    max-width: 100%;
+    display: block;
+}
+
+h1,
+h2,
+h3 {
+    color: var(--primary-color);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+}
+
+/* Decorative underline for H2 */
+h2::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    /* Significantly longer (was 120px) */
+    height: 4px;
+    background: var(--secondary-color);
+    border-radius: 2px;
+}
+
+/* Utility to remove default H2 underline */
+.h2-no-underline::after {
+    display: none;
+}
+
+/* Utility to highlight specific text with underline style */
+.text-highlight {
+    position: relative;
+    display: inline-block;
+}
+
+.text-highlight::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--secondary-color);
+    border-radius: 2px;
+}
+
+p {
+    margin-bottom: 1.5rem;
+    color: var(--text-muted);
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.section {
+    padding: var(--spacing-section) 0;
+}
+
+/* Navigation */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 0.2rem 0;
+    /* Reduced padding to minimize height */
+    box-shadow: var(--shadow-soft);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+}
+
+/* Ensure logos fit cleanly */
+.navbar .logo img {
+    height: 75px;
+    /* Increased by 50% */
+    width: auto;
+    object-fit: contain;
+}
+
+/* Logos now controlled by parent .navbar .logo img rule, but we scale Solar Light up specifically */
+.navbar .logo img[src*="solar"] {
+    height: 110px;
+    /* Significantly larger for Solar Light (75px * 1.5) */
+    margin-top: 15px;
+    /* Moved down by another 5px (total 15px) */
+}
+
+.navbar .logo img[src*="intermediator"] {
+    height: 75px;
+    /* Keep Intermediator at previous size */
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--secondary-dark);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    /* Modern technical gradient */
+    background: radial-gradient(circle at top right, #e2e8f0, transparent 40%),
+        linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    padding: 80px 0 100px;
+    text-align: center;
+    overflow: hidden;
+    scroll-margin-top: 160px;
+    /* Offset for fixed navbar to show full header */
+}
+
+.hero::before {
+    /* Subtle geometric pattern */
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.hero-media {
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    /* Stronger shadow for depth */
+    border: 4px solid white;
+}
+
+.hero-mp4 {
+    width: 100%;
+    display: block;
+}
+
+/* General Section Styling */
+.section-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 3rem;
+    box-shadow: var(--shadow-soft);
+}
+
+/* About Section */
+.section-about {
+    background: linear-gradient(to bottom, #ffffff, #f1f5f9);
+}
+
+.section-about-container {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    padding: 3rem 4rem;
+    text-align: center;
+    max-width: 1400px;
+    /* Overwrite default container width for this section */
+    width: 95%;
+    /* Ensure it doesn't overflow viewport on smaller screens */
+}
+
+.section-about p {
+    text-align: left;
+    max-width: 100%;
+    /* Allowed to fill the wider container */
+    margin: 0 auto 1.5rem;
+}
+
+.people-wrapper {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+.people {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 900px;
+}
+
+.person {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: #f8fafc;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.person:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--secondary-color);
+}
+
+.person img {
+    width: 120px;
+    /* Increased by 50% (80px -> 120px) */
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.person-info {
+    text-align: left;
+}
+
+.person-info strong {
+    display: block;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.person-role {
+    display: block;
+    font-weight: 600;
+    color: var(--secondary-dark);
+    /* Distinct color for title */
+    margin-bottom: 2px;
+}
+
+.person-info span {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Prosument & Invoice Sections */
+.section-prosument,
+.section-faktura {
+    background-color: #ffffff;
+}
+
+.section-prosument-container,
+.section-faktura-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-prosument p {
+    text-align: left;
+}
+
+/* Invoice Image */
+.img-responsive-shadow {
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+    margin: 2rem auto;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #e2e8f0;
+}
+
+/* Contact Section */
+.section-kontakt {
+    background: var(--primary-color);
+    color: var(--text-light);
+    padding: 80px 0 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Abstract shapes for contact bg */
+.section-kontakt::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 300px;
+    height: 300px;
+    background: var(--secondary-color);
+    filter: blur(80px);
+    opacity: 0.2;
+    border-radius: 50%;
+}
+
+.section-kontakt h1,
+.section-kontakt h2 {
+    color: white;
+}
+
+.section-kontakt h2::after {
+    background: var(--accent-color);
+}
+
+.section-kontakt p {
+    color: #cbd5e1;
+}
+
+.contact-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Vertically center relative to each other */
+    gap: 4rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.contact-logo-box {
+    background: white;
+    padding: 1rem;
+    /* Reduced padding to maximize space */
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 320px;
+    height: 160px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+}
+
+.contact-logo-box img {
+    max-width: 100%;
+    max-height: 100%;
+    /* Allow filling the frame */
+    object-fit: contain;
+    /* Ensure aspect ratio is preserved */
+}
+
+/* Specific scale for Solar Light in contact section */
+.contact-logo-box img[src*="solar"] {
+    transform: scale(1.5) translateY(10px);
+    /* Moved down */
+    /* 50% larger */
+}
+
+.contact-details {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+}
+
+.contact-details strong {
+    color: var(--secondary-color);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Footer */
+.footer {
+    background: var(--primary-light);
+    color: #94a3b8;
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    .navbar .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .section-about-container {
+        padding: 2rem;
+    }
+
+    .people {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-logos {
+        gap: 1rem;
+    }
+}
